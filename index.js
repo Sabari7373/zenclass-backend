@@ -68,6 +68,7 @@ app.post("/register", async function (req, res) {
     console.log(req.body);
     await db.collection("users").insertOne(req.body);
     await connection.close();
+    res.header("Access-Control-Allow-Origin","*")
     res.json({
       message: "Successfully Registered",
     });
