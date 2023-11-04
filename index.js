@@ -15,15 +15,14 @@ const { db } = require("./models/leads");
 // Middleweare
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    orgin:"*",
+    methods:"GET,POST,PUT,DELETE",
+    credentials:true
+  })
+)
 
-app.use((req, res, next) => {
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-  next();
-});
 
 app.use("api/leads", leadsRoute) // for leads
 
