@@ -17,6 +17,14 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
 app.use("api/leads", leadsRoute) // for leads
 
 
@@ -68,7 +76,6 @@ app.post("/register", async function (req, res) {
     console.log(req.body);
     await db.collection("users").insertOne(req.body);
     await connection.close();
-    res.header("Access-Control-Allow-Origin","*")
     res.json({
       message: "Successfully Registered",
     });
