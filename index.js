@@ -15,13 +15,7 @@ const { db } = require("./models/leads");
 // Middleweare
 app.use(express.json());
 
-app.use(
-  cors({
-    orgin:"*",
-    methods:"GET,POST,PUT,DELETE",
-    credentials:true
-  })
-)
+app.use(cors())
 
 
 app.use("api/leads", leadsRoute) // for leads
