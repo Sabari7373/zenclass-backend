@@ -15,9 +15,7 @@ const { db } = require("./models/leads");
 // Middleweare
 app.use(express.json());
 
-app.use(cors({
-  origin:"*"
-}));
+app.use(cors());
 
 app.use("api/leads", leadsRoute) // for leads
 
