@@ -1,6 +1,5 @@
 
 
-
 const mongoose = require("mongoose");
 const mongoURL = "mongodb+srv://sabariganesh7373:Sabari-capstone@cluster0.8dkwxcb.mongodb.net/?retryWrites=true&w=majority";
 
