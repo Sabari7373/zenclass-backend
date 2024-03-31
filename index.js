@@ -15,14 +15,15 @@ const { db } = require("./models/leads");
 // Middleweare
 app.use(express.json());
 
-app.use(cors())
+app.use(cors({origin: "https://zenclass-studend-dashboard.netlify.app"}));
+// app.use(cors({origin: "http://localhost:3000"}));
 
 
 app.use("api/leads", leadsRoute) // for leads
 
 
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.send('hello worlds')
 });
 
 app.post("/login", async function (req, res) {
@@ -30,6 +31,8 @@ app.post("/login", async function (req, res) {
     const connection = await mongoClient.connect(URL);
 
     const db = connection.db("blog");
+
+    
 
     const user = await db.collection("users").findOne({ email: req.body.email });
     if (user) {
@@ -111,6 +114,7 @@ app.delete('/servicereq/:id', async function (req, res) {
     });
   }
 })
+
 // Remove a Query
 app.delete('/removequery/:id', async function (req, res) {
   try {
@@ -264,6 +268,6 @@ app.post('/webcode', async function (req, res) {
 })
 
 app.listen(process.env.PORT || 3001, () => {
-  console.log(" server running on port  3001");
+  console.log("Server running on port - 3001");
 }
 );

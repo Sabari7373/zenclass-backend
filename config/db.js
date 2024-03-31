@@ -12,7 +12,7 @@ connection.on("error", ()=>{
     console.log("Mongo DB connection failed !!!!!!");
 })
 connection.on("connected" , ()=>{
-    console.log("mongo DB connection Successfull !!!!!!");
+    console.log("Mongo DB connection Successfull..!!");
 })
 
 module.exports = mongoose;
