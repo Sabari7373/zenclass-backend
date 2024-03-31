@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
 const mongodb = require("mongodb");
 const mongoClient = mongodb.MongoClient;
 const dotenv = require("dotenv").config();
@@ -32,12 +33,13 @@ app.post("/login", async function (req, res) {
 
     const db = connection.db("blog");
 
-    
-
+  
     const user = await db.collection("users").findOne({ email: req.body.email });
     if (user) {
+      const token = await jwt.sign({id:user._id},"Its_my_key")
       res.status(200).json({
         message: "Successfully Logged In",
+        token:token
       });
     } else {
       res.status(401).json({
