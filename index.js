@@ -30,16 +30,27 @@ app.get('/', (req, res) => {
 app.post("/login", async function (req, res) {
   try {
     const connection = await mongoClient.connect(URL);
-
     const db = connection.db("blog");
-
   
     const user = await db.collection("users").findOne({ email: req.body.email });
+    var loggedUser =  req.body.loginAs;
+    var loggedUserNew ;
+    if(loggedUser == "admin"){
+     loggedUserNew = 1;
+    } 
+    if(loggedUser == "student"){
+      loggedUserNew = 0;
+    } else {
+      console.log("No access");
+    }
     if (user) {
+     
       const token = await jwt.sign({id:user._id},"Its_my_key")
+      
       res.status(200).json({
         message: "Successfully Logged In",
-        token:token
+        token:token,
+        loggedUser : loggedUserNew
       });
     } else {
       res.status(401).json({
@@ -50,6 +61,7 @@ app.post("/login", async function (req, res) {
     console.log(error);
   }
 });
+
 
 app.get("/service", async function (req, res) {
   try {
@@ -266,6 +278,37 @@ app.post('/webcode', async function (req, res) {
     res.status(500).json({
       message: "Error Occurs"
     })
+  }
+})
+
+
+
+//For Admin Components
+
+// List The All Course
+app.post("/admin/courses", async function (req, res) {
+  try {
+    const connection = await mongodb.MongoClient.connect(URL);
+    const db = connection.db("student")
+    const listOfCourses = await db.collection("courses").insertOne(req.body);
+    await connection.close()
+    res.status(200).json(listOfCourses)
+  }
+  catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+})
+
+app.get("/admin/getqueries", async function (req, res) {
+  try {
+    const connection = await mongodb.MongoClient.connect(URL);
+    const db = connection.db("student")
+    const listOfQueries = await db.collection("queries").find().toArray()
+    await connection.close()
+    res.status(200).json(listOfQueries)
+  }
+  catch (error) {
+    res.status(400).json({ error: error.message })
   }
 })
 
