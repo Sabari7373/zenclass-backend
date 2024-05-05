@@ -16,8 +16,8 @@ const { db } = require("./models/leads");
 // Middleweare
 app.use(express.json());
 
-app.use(cors({origin: "https://zenclass-frontend.vercel.app"}));
-// app.use(cors({origin: "http://localhost:3000"}));
+// app.use(cors({origin: "https://zenclass-frontend.vercel.app"}));
+app.use(cors({origin: "http://localhost:3000"}));
 
 
 app.use("api/leads", leadsRoute) // for leads
