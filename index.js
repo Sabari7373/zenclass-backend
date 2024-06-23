@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const mongodb = require("mongodb");
 const mongoClient = mongodb.MongoClient;
 const dotenv = require("dotenv").config();
-const URL = "mongodb+srv://sabariganesh7373:Sabari-capstone@cluster0.8dkwxcb.mongodb.net/?retryWrites=true&w=majority";
+const URL = "mongodb+srv://sabariganesh7373:sabariganesh7373@cluster0.8dkwxcb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 require('./config/db')
 
 

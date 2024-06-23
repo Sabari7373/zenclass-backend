@@ -1,7 +1,7 @@
 
 
 const mongoose = require("mongoose");
-const mongoURL = "mongodb+srv://sabariganesh7373:Sabari-capstone@cluster0.8dkwxcb.mongodb.net/?retryWrites=true&w=majority";
+const mongoURL = "mongodb+srv://sabariganesh7373:sabariganesh7373@cluster0.8dkwxcb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(mongoURL , { useNewUrlParser:true , useUnifiedTopology:true });
 
